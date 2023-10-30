@@ -39,6 +39,7 @@ void binary_tree_delete(binary_tree_t *tree);
 /* ========== 4-binary_tree_is_leaf.c ========== */
 int binary_tree_is_leaf(const binary_tree_t *node);
 
-
+/* ========== 5-binary_tree_is_root.c ========== */
+int binary_tree_is_root(const binary_tree_t *node);
 
 #endif /* BINARY_TREES_H */
