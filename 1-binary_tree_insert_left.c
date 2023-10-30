@@ -30,10 +30,8 @@ binary_tree_t *binary_tree_insert_left(binary_tree_t *parent, int value)
 	}
 	else /* If parent already has a left-child*/
 	{
-		/**
-		 * the new node must take its place and the old left-child
-		 * must be set as the left-child of the new node
-		*/
+		/* the new node must take its place and the old left-child */
+		/* must be set as the left-child of the new node */
 		tmp = parent->left;
 		parent->left = new;
 		new->parent = parent;
