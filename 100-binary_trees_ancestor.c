@@ -19,11 +19,11 @@ const binary_tree_t *second)
 		return ((binary_tree_t *)first);
 
 	if (first == second->parent || !first->parent ||
-	(!first->parent && second->parent))
+	(!first->parent->parent && second->parent))
 		return (binary_trees_ancestor(first, second->parent));
 
 	else if (first->parent == second || !second->parent ||
-	(!second->parent && first->parent))
+	(!second->parent->parent && first->parent))
 
 		return (binary_trees_ancestor(first->parent, second));
 
