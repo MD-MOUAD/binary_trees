@@ -21,6 +21,8 @@ int main(void)
     root->right->left = binary_tree_node(root->right, 10);
 
     binary_tree_print(root);
+    printf(" height is %ld\n", binary_tree_height(root));
+    printf("size of nodes is %ld\n", binary_tree_size(root));
     perfect = binary_tree_is_perfect(root);
     printf("Perfect: %d\n\n", perfect);
 
