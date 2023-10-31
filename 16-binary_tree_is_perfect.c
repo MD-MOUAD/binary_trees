@@ -57,6 +57,8 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 {
 	/* in a perfect tree Total Nodes = 2^(height + 1) - 1 */
 	/* I love mathematics :) */
+	if (!tree)
+		return (0);
 	return ((power2(binary_tree_height(tree) + 1) - 1)
 			== (int)binary_tree_size(tree));
 }
