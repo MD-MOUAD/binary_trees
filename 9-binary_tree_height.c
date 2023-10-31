@@ -19,6 +19,7 @@ int max(int a, int b)
 */
 size_t binary_tree_height(const binary_tree_t *tree)
 {
+	/* the height of null tree is -1 but for this task it will be  0 */
 	if (!tree || (!tree->left && !tree->right)) /* if tree is leaf*/
 		return (0);
 
