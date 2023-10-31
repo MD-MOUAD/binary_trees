@@ -18,21 +18,14 @@ const binary_tree_t *second)
 	if (first == second)
 		return ((binary_tree_t *)first);
 
-	if (first == second->parent || (!first->parent && binary_tree_depth(second)))
-		return ((binary_tree_t *)first);
-	if (second == first->parent || (!second->parent && binary_tree_depth(first)))
-		return ((binary_tree_t *)second);
+	if (first == second->parent || !first->parent ||
+	(!first->parent->parent && second->parent))
+		return (binary_trees_ancestor(first, second->parent));
+
+	else if (first->parent == second || !second->parent ||
+	(!second->parent->parent && first->parent))
+
+		return (binary_trees_ancestor(first->parent, second));
 
 	return (binary_trees_ancestor(first->parent, second->parent));
-}
-/**
- * binary_tree_depth - measures the depth of a binary tree
- * @tree: a pointer to the node to measure the depth
- * Return: the depth or 0 if tree is NULL
-*/
-size_t binary_tree_depth(const binary_tree_t *tree)
-{
-	if (!tree || !tree->parent)
-		return (0);
-	return (1 + binary_tree_depth(tree->parent));
 }
