@@ -78,7 +78,7 @@ void free2(Queue *queue)
 int binary_tree_is_complete(const binary_tree_t *tree)
 {
 	Queue *queue;
-	const binary_tree_t *btree_node;
+	const binary_tree_t *btree_node, *left, *right;
 	int last_except = 0;
 
 	if (!tree)
@@ -90,30 +90,30 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 	enqueue(queue, tree);
 	while (queue->front)
 	{
-		/* dequeue and get the btree-node address */
+		left = btree_node->left;
+		right = btree_node->right;
 		btree_node = dequeue(queue);
-		if (!btree_node->left && btree_node->right)
+		if (!left && right)
 		{
 			free2(queue);  /* If a node has a left child*/
 			return (0);   /* but no right child */
 		}
-		if (btree_node->left && !btree_node->right
-			&& (btree_node->left->left || btree_node->left->right))
+		if (left && !right && (left->left || left->right))
 		{
 			free2(queue);  /* If a node has a left child but no right child */
 			return (0);  /* and is not in the last level */
 		}
-		if (btree_node->left && !btree_node->right && last_except == 1)
+		if ((left && !right || !left && !right) && last_except == 1)
 		{
-			free2(queue);  /* If a node has a left child but no right child */
+			free2(queue);  /* If a node has no childs or only a left child */
 			return (0);  /* and is in the last level for the second time */
 		}
-		if (btree_node->left && !btree_node->right)
+		if (left && !right || !left && !right)
 			last_except = 1;
-		if (btree_node->left)
-			enqueue(queue, btree_node->left);
-		if (btree_node->right)
-			enqueue(queue, btree_node->right);
+		if (left)
+			enqueue(queue, left);
+		if (right)
+			enqueue(queue, right);
 	}
 	free2(queue);
 	return (1);
