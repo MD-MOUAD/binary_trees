@@ -9,7 +9,7 @@ binary_tree_t *binary_tree_rotate_left(binary_tree_t *tree)
 {
 	binary_tree_t *pivot, *tmp;
 
-	if (!tree || !tree->right)
+	if (!tree || !tree->right) /*must have right child that will be the pivot*/
 		return (NULL);
 
 	/* tree and pivot exchange childes */
