@@ -98,14 +98,18 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 			free2(queue);  /* If a node has a left child*/
 			return (0);   /* but no right child */
 		}
-		if (!left && ! right)
+		if (!left && !right)
 		{
 			while (queue->front)
 			{
 				btree_node = dequeue(queue);
 				if (btree_node->left || btree_node->right)
+				{
+					free2(queue);
 					return (0);
+				}
 			}
+			free2(queue);
 			return (1);
 		}
 		if (left && !right && (left->left || left->right))
