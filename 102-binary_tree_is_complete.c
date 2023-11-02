@@ -91,8 +91,7 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 	while (queue->front)
 	{
 		btree_node = dequeue(queue);
-		left = btree_node->left;
-		right = btree_node->right;
+		left = btree_node->left, right = btree_node->right;
 		if (left)
 		{
 			if (flag == 1)
