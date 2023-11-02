@@ -78,43 +78,49 @@ void free2(Queue *queue)
 int binary_tree_is_complete(const binary_tree_t *tree)
 {
 	Queue *queue;
+	int flag = 0;
 	const binary_tree_t *btree_node, *left, *right;
-	int last_except = 0;
 
-	if (!tree)
+	if (tree == NULL)
 		return (0);
+
 	queue = malloc(sizeof(Queue));
 	if (!queue)
 		return (0);
 	queue->front = queue->rear = NULL;
 	enqueue(queue, tree);
+
 	while (queue->front)
 	{
 		btree_node = dequeue(queue);
 		left = btree_node->left;
 		right = btree_node->right;
-		if (!left || !right) /* order is important */
+		if (left)
 		{
-			while (queue->front)
+			if (flag == 1)
 			{
-				btree_node = dequeue(queue);
-				if (btree_node->left || btree_node->right)
-				{
-					free2(queue);
-					return (0);
-				}
+				free2(queue);
+				return (0);
 			}
-			return (1);
+			enqueue(queue, left);
 		}
-		/* order is important */
-		enqueue(queue, left);
-		enqueue(queue, right);
+		else
+			flag = 1;
+		if (right)
+		{
+			if (flag == 1)
+			{
+				free2(queue);
+				return (0);
+			}
+			enqueue(queue, right);
+		}
+		else
+			flag = 1;
+	}
 	free2(queue);
 	return (1);
 }
-
-
-
 
 
 
