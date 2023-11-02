@@ -116,5 +116,10 @@ int binary_tree_is_complete(const binary_tree_t *tree);
 /* ========== 103-binary_tree_rotate_left.c ========== */
 binary_tree_t *binary_tree_rotate_left(binary_tree_t *tree);
 
+/* ========== 104-binary_tree_rotate_right.c ========== */
+binary_tree_t *binary_tree_rotate_right(binary_tree_t *tree);
+
+/* */
+int binary_tree_is_bst(const binary_tree_t *tree);
 
 #endif /* BINARY_TREES_H */
