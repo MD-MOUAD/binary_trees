@@ -12,12 +12,14 @@ binary_tree_t *binary_tree_rotate_left(binary_tree_t *tree)
 	if (!tree || !tree->left)
 		return (NULL);
 
+	/* tree and pivot exchange childes */
 	pivot = tree->right;
 	tmp = pivot->left;
 	pivot->left = tree;
 	tree->right = tmp;
 	if (tmp)
 		tmp->parent = tree;
+	/* now tree and pivot exchange parents */
 	tmp = tree->parent;
 	tree->parent = pivot;
 	pivot->parent = tmp;
