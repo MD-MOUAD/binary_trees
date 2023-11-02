@@ -2,7 +2,7 @@
 #define BINARY_TREES_H
 
 #include <stdlib.h>
-
+#include <stdio.h>
 
 /**
  * struct binary_tree_s - Binary tree node
@@ -20,6 +20,28 @@ struct binary_tree_s
 	struct binary_tree_s *right;
 };
 typedef struct binary_tree_s binary_tree_t;
+
+/**
+ * struct node - Node structure for a queue element
+ * @btree_node: Pointer to a binary tree node
+ * @next: Pointer to the next node in the queue
+ */
+typedef struct node
+{
+	const void *btree_node;
+	struct node *next;
+} Node;
+
+/**
+ * struct queue - Queue data structure
+ * @front: Pointer to the front node of the queue
+ * @rear: Pointer to the rear node of the queue
+ */
+typedef struct queue
+{
+	Node *front;
+	Node *rear;
+} Queue;
 
 /* ========== binary_tree_print.c ========== */
 void binary_tree_print(const binary_tree_t *tree);
@@ -84,5 +106,8 @@ binary_tree_t *binary_tree_uncle(binary_tree_t *node);
 /* */
 binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 const binary_tree_t *second);
+
+void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int));
+
 
 #endif /* BINARY_TREES_H */
