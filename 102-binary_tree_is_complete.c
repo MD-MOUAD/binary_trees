@@ -49,9 +49,30 @@ const void *dequeue(Queue *queue)
 }
 
 /**
- * binary_tree_levelorder - checks if a binary tree is complete
+ * free2 - rees the memory allocated for a Queue and its associated Nodes
+ * @queue: A pointer to the Queue to be deallocated.
+ * Return: (void)
+ */
+void free2(Queue *queue)
+{
+	Node *tmp;
+
+	if (!queue)
+		return;
+	tmp = queue->front;
+	while (queue->front)
+	{
+		tmp = queue->front;
+		queue->front = queue->front->next;
+		free(tmp);
+	}
+	free(queue);
+}
+
+/**
+ * binary_tree_is_complete - checks if a binary tree is complete
  * using level-order traversal
- * @tree: a pointer to the root node of the tree to traverse
+ * @tree: a pointer to the root node of the tree to check
  * Return: 1 if the tree is complete otherwise 0
  */
 int binary_tree_is_complete(const binary_tree_t *tree)
@@ -62,7 +83,6 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 
 	if (!tree)
 		return (0);
-
 	queue = malloc(sizeof(Queue));
 	if (!queue)
 		return (0);
@@ -72,26 +92,29 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 	{
 		/* dequeue and get the btree-node address */
 		btree_node = dequeue(queue);
-
 		if (!btree_node->left && btree_node->right)
-			return (0);
-
+		{
+			free2(queue);  /* If a node has a left child*/
+			return (0);   /* but no right child */
+		}
 		if (btree_node->left && !btree_node->right
 			&& (btree_node->left->left || btree_node->left->right))
-			return (0);
-
+		{
+			free2(queue);  /* If a node has a left child but no right child */
+			return (0);  /* and is not in the last level */
+		}
 		if (btree_node->left && !btree_node->right && last_except == 1)
-			return (0);
-
-		if (btree_node->left)
-			enqueue(queue, btree_node->left);
-
-		if (btree_node->right)
-			enqueue(queue, btree_node->right);
-
+		{
+			free2(queue);  /* If a node has a left child but no right child */
+			return (0);  /* and is in the last level for the second time */
+		}
 		if (btree_node->left && !btree_node->right)
 			last_except = 1;
+		if (btree_node->left)
+			enqueue(queue, btree_node->left);
+		if (btree_node->right)
+			enqueue(queue, btree_node->right);
 	}
-	free(queue);
+	free2(queue);
 	return (1);
 }
