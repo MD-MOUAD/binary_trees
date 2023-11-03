@@ -5,7 +5,7 @@
  * @b: second number
  * Return: max(a, b)
 */
-int max(int a, int b)
+int maxim(int a, int b)
 {
 	if (a > b)
 		return (a);
@@ -23,6 +23,6 @@ size_t binary_tree_height(const binary_tree_t *tree)
 	if (!tree || (!tree->left && !tree->right)) /* if tree is leaf*/
 		return (0);
 
-	return (1 + max(binary_tree_height(tree->left),
+	return (1 + maxim(binary_tree_height(tree->left),
 					binary_tree_height(tree->right)));
 }
