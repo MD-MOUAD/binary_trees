@@ -1,6 +1,6 @@
 #include "binary_trees.h"
 /**
- * max - return max of two numbers
+ * maxim - return max of two numbers
  * @a: first number
  * @b: second number
  * Return: max(a, b)
